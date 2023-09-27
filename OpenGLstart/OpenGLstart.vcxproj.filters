@@ -18,8 +18,22 @@
     <ClCompile Include="OpenGLstart.cpp">
       <Filter>Исходные файлы</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\..\Downloads\ShaderFuncs.cpp">
+      <Filter>Исходные файлы</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
+    <None Include="..\..\..\Downloads\VertexShader.glsl">
+      <Filter>Исходные файлы</Filter>
+    </None>
+    <None Include="..\..\..\Downloads\FragmentShader.glsl">
+      <Filter>Исходные файлы</Filter>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\..\..\Downloads\ShaderFuncs.h">
+      <Filter>Исходные файлы</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

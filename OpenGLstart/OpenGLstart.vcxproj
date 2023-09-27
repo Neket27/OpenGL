@@ -133,10 +133,16 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="..\..\..\Downloads\ShaderFuncs.cpp" />
     <ClCompile Include="OpenGLstart.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="..\..\..\Downloads\FragmentShader.glsl" />
+    <None Include="..\..\..\Downloads\VertexShader.glsl" />
     <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\..\..\Downloads\ShaderFuncs.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
