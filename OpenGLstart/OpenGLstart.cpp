@@ -75,6 +75,7 @@ void drawSmth(GLfloat* colors, GLfloat* points, GLfloat startx, GLfloat starty, 
         points[i] += startx;
     for (int i = 1; i < n * 3; i += 3)
         points[i] += starty;
+
     GLuint coords_vbo = 0;
     glGenBuffers(1, &coords_vbo);
     glBindBuffer(GL_ARRAY_BUFFER, coords_vbo);
@@ -264,8 +265,15 @@ void drawTrianglesStrip(GLfloat startx, GLfloat starty, GLfloat size) {
        1.0f, 0.0f,0.0f,
        1.0f, 0.0f, 0.0f,
         1.0f, 0.0f, 0.0f,
-                1.0f, 0.0f, 0.0f,
-
+        1.0f, 0.0f, 0.0f,
+         1.0f, 0.0f, 0.0f,
+        1.0f, 0.0f, 0.0f,
+        1.0f, 0.0f, 0.0f,
+        1.0f, 0.0f, 0.0f,
+         1.0f, 0.0f, 0.0f,
+          1.0f, 0.0f, 0.0f,
+         1.0f, 0.0f, 0.0f,
+         1.0f, 0.0f, 0.0f,
     };
     GLfloat points[] = {
        -1.0f, -0.7f, 0.0f,
@@ -275,12 +283,20 @@ void drawTrianglesStrip(GLfloat startx, GLfloat starty, GLfloat size) {
      0.3f, 0.4f, 0.0f,
      0.3f, -0.2f, 0.0f,
       1.0f, 0.5f, 0.0f,
+
       1.0f, -0.2f, 0.0f,
 
 
-      0.3f, -0.2f, 0.0f,
-      -0.2f, -0.2f, 0.0f,
+      0.3f, 0.4f, 0.0f,
+      -0.2f, 0.6f, 0.0f,
       0.3f, -1.0f, 0.0f,
+
+      0.3f, -1.0f, 0.0f,
+      -0.2f, 0.4f, 0.0f,
+            -0.3f, 0.0f, 0.0f,
+
+               0.9f, 0.5f, 0.0f,
+                -1.0f, -0.7f, 0.0f,
 
          //   -1.0f, -1.0f, 0.0f,
 
@@ -288,7 +304,7 @@ void drawTrianglesStrip(GLfloat startx, GLfloat starty, GLfloat size) {
 
 
     };
-    drawSmth(colors, points, startx, starty, size, GL_TRIANGLE_STRIP, 10);
+    drawSmth(colors, points, startx, starty, size, GL_TRIANGLE_STRIP, 15);
 }
 void drawTrianglesFan(GLfloat startx, GLfloat starty, GLfloat size) {
     GLfloat colors[] = {
