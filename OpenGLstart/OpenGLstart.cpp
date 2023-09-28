@@ -107,20 +107,20 @@ void drawSmth(GLfloat* colors, GLfloat* points, GLfloat startx, GLfloat starty, 
 }
 void drawHexagonDots(GLfloat startx, GLfloat starty, GLfloat size) {
 	GLfloat colors[] = {
-		1.0f, 0.0f, 0.0f,
-		 1.0f, 0.0f, 0.0f,
-		 1.0f, 0.0f, 0.0f,
-		 1.0f, 0.0f, 0.0f,
-		 1.0f, 0.0f, 0.0f,
-		 1.0f, 0.0f, 0.0f,
+		 0.0f, 0.5f, 0.0f,
+		 0.0f, 0.5f, 0.0f,
+		 0.0f, 0.5f, 0.0f,
+		 0.0f, 0.5f, 0.0f,
+		 0.0f, 0.5f, 0.0f,
+		 0.0f, 0.5f, 0.0f,
 	};
 	GLfloat points[] = {
 	   0.0f, 1.0f, 0.0f,
-	   -0.86f, 0.5f, 0.0f,
+	  -0.86f, 0.5f, 0.0f,
 	   0.86f, 0.5f, 0.0f,
 	   0.86f, -0.5f, 0.0f,
 	   -0.86f, -0.5f, 0.0f,
-	   0.0f, -1.0f, 0.0f,
+	   0.0f, -1.0f, 0.0f
 	};
 
 	glEnable(GL_PROGRAM_POINT_SIZE);
@@ -131,12 +131,12 @@ void drawHexagonDots(GLfloat startx, GLfloat starty, GLfloat size) {
 
 void drawHexagon(GLfloat startx, GLfloat starty, GLfloat size) {
 	GLfloat colors[] = {
-		 0.0f, 1.0f, 0.0f,
-		  0.0f, 1.0f, 0.0f,
-		  0.0f, 1.0f, 0.0f,
-		  0.0f, 1.0f, 0.0f,
-		  0.0f, 1.0f, 0.0f,
-		  0.0f, 1.0f, 0.0f,
+		 0.7f, 0.7f, 0.7f,
+		 0.7f, 0.7f, 0.7f,
+		 0.7f, 0.7f, 0.7f,
+		 0.7f, 0.7f, 0.7f,
+		 0.7f, 0.7f, 0.7f,
+		 0.7f, 0.7f, 0.7f
 	};
 	GLfloat points[] = {
 	   0.0f, 1.0f, 0.0f,
@@ -170,9 +170,6 @@ void drawLineStrip(GLfloat startx, GLfloat starty, GLfloat size) {
 	   0.3f, 1.0f, 0.0f,
 	   1.0f, -0.7f, 0.0f,
 
-
-
-
 	};
 
 	glLineWidth(3);
@@ -198,7 +195,6 @@ void drawLineLoop(GLfloat startx, GLfloat starty, GLfloat size) {
 	 1.0f, -0.3f, 0.0f,
 	 0.1f, -0.3f, 0.0f,
 	 0.1f, -1.0f, 0.0f,
-	 //  -0.5f, -0.3f, 0.0f,
 
 	};
 
@@ -297,23 +293,23 @@ void drawTrianglesStrip(GLfloat startx, GLfloat starty, GLfloat size) {
 }
 void drawTrianglesFan(GLfloat startx, GLfloat starty, GLfloat size) {
 	GLfloat colors[] = {
-		0.0f, 0.0f, 1.0f,
-		 0.0f, 0.0f, 1.0f,
-		 0.0f, 0.0f, 1.0f,
-		 0.0f, 0.0f, 1.0f,
-		0.0f, 0.0f, 1.0f,
-		0.0f, 0.0f, 1.0f,
-		0.0f, 0.0f, 1.0f,
-		0.0f, 0.0f, 1.0f,
-		0.0f, 0.0f, 1.0f,
-			 0.0f, 0.0f, 1.0f,
-			   0.0f, 0.0f, 1.0f,
-		0.0f, 0.0f, 1.0f,
-		0.0f, 0.0f, 1.0f,
-		0.0f, 0.0f, 1.0f,
-		0.0f, 0.0f, 1.0f,
-		0.0f, 0.0f, 1.0f,
-			 0.0f, 0.0f, 1.0f,
+		0.7f, 0.2f, 1.0f,
+		0.7f, 0.2f, 1.0f,
+		0.7f, 0.2f, 1.0f,
+		 0.7f, 0.2f, 1.0f,
+		0.7f, 0.2f, 1.0f,
+		0.7f, 0.2f, 1.0f,
+		0.7f, 0.2f, 1.0f,
+		 0.7f, 0.2f, 1.0f,
+		0.7f, 0.2f, 1.0f,
+		0.7f, 0.2f, 1.0f,
+		0.7f, 0.2f, 1.0f,
+		 0.7f, 0.2f, 1.0f,
+		0.7f, 0.2f, 1.0f,
+		0.7f, 0.2f, 1.0f,
+		0.7f, 0.2f, 1.0f,
+		 0.7f, 0.2f, 1.0f,
+		 0.7f, 0.2f, 1.0f
 	};
 	GLfloat points[] = {
 		 -0.1f, -0.1f, 0.0f,
