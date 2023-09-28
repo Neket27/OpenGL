@@ -279,29 +279,18 @@ void drawTrianglesStrip(GLfloat startx, GLfloat starty, GLfloat size) {
        -1.0f, -0.7f, 0.0f,
      -0.7f, 0.8f, 0.0f,
      0.5f, 1.0f, 0.0f,
-
      0.3f, 0.4f, 0.0f,
      0.3f, -0.2f, 0.0f,
       1.0f, 0.5f, 0.0f,
-
       1.0f, -0.2f, 0.0f,
-
-
       0.3f, 0.4f, 0.0f,
       -0.2f, 0.6f, 0.0f,
       0.3f, -1.0f, 0.0f,
-
       0.3f, -1.0f, 0.0f,
       -0.2f, 0.4f, 0.0f,
-            -0.3f, 0.0f, 0.0f,
-
-               0.9f, 0.5f, 0.0f,
-                -1.0f, -0.7f, 0.0f,
-
-         //   -1.0f, -1.0f, 0.0f,
-
-
-
+      -0.3f, 0.0f, 0.0f,
+       0.9f, 0.5f, 0.0f,
+       -1.0f, -0.7f, 0.0f,
 
     };
     drawSmth(colors, points, startx, starty, size, GL_TRIANGLE_STRIP, 15);
@@ -318,25 +307,40 @@ void drawTrianglesFan(GLfloat startx, GLfloat starty, GLfloat size) {
         0.0f, 0.0f, 1.0f,
         0.0f, 0.0f, 1.0f,
              0.0f, 0.0f, 1.0f,
+               0.0f, 0.0f, 1.0f,
+        0.0f, 0.0f, 1.0f,
+        0.0f, 0.0f, 1.0f,
+        0.0f, 0.0f, 1.0f,
+        0.0f, 0.0f, 1.0f,
+        0.0f, 0.0f, 1.0f,
+             0.0f, 0.0f, 1.0f,
     };
     GLfloat points[] = {
-        -0.2f,0.0f,0.0f,
-       -1.0f, 0.2f, 0.0f,
-       -0.5f, 0.7f, 0.0f,
-       0.0f, 0.3f, 0.0f,
-       1.0f, 0.7f, 0.0f,
-       1.0f, 0.0f, 0.0f,
-       -0.2f, 0.0f, 0.0f,
-        0.0f, -1.0f, 0.0f,
-       -0.8f, -0.8f, 0.0f,
-          -1.0f, 0.2f, 0.0f,
+         -0.1f, -0.1f, 0.0f,
+       -1.0f, -0.7f, 0.0f,
+     -0.7f, 0.8f, 0.0f,
+     0.5f, 1.0f, 0.0f,
+        0.4f, 0.3f, 0.0f,
+        1.0f, 0.4f, 0.0f,
+        1.0f, -0.3f, 0.0f,
+           0.4f, 0.3f, 0.0f,
+           0.4f, -1.0f, 0.0f,
+         
+        
+    
+
+
+
+          
+
+
     };
-    drawSmth(colors, points, startx, starty, size, GL_TRIANGLE_FAN, 10);
+    drawSmth(colors, points, startx, starty, size, GL_TRIANGLE_FAN, 9);
 }
 
 void drawHexagonFan(GLfloat startx, GLfloat starty, GLfloat size) {
     GLfloat colors[] = {
-           0.0f, 1.0f, 0.0f,
+            0.0f, 1.0f, 0.0f,
             0.0f, 1.0f, 0.0f,
             0.0f, 1.0f, 0.0f,
             0.0f, 1.0f, 0.0f,
@@ -385,48 +389,74 @@ void drawPolygon(GLfloat startx, GLfloat starty, GLfloat size) {
      1.0f,0.0f,1.0f,
      1.0f,0.0f,1.0f,
 
-           1.0f,1.0f,1.0f,
+      1.0f,1.0f,1.0f,
      1.0f,1.0f,1.0f,
      1.0f,1.0f,1.0f,
 
      0.5f,0.0f,0.0f,
      0.5f,0.0f,0.0f,
      0.5f,0.0f,0.0f,
+
+     1.0f,0.0f,0.0f,
+     1.0f,0.0f,0.0f,
+     1.0f,0.0f,0.0f,
+
+     0.0f,1.0f,0.0f,
+     0.0f,1.0f,0.0f,
+     0.0f,1.0f,0.0f,
+
+        0.0f,0.0f,1.0f,
+     0.0f,0.0f,1.0f,
+     0.0f,0.0f,1.0f,
+
     };
     GLfloat points[] = {
-     -1.0f,-1.0f,0.0f,
-     -0.2f,-1.0f,0.0f,
-     -0.8f,-0.8f,0.0f,
+     -1.0f,-0.8f,0.0f,
+     0.0f,-0.9f,0.0f,
+     -0.5f,0.0f,0.0f,
 
-     -1.0f,-1.0f,0.0f,
-     -1.0f,0.8f,0.0f,
-     -0.8f,-0.8f,0.0f,
+     -0.3f,-0.5f,0.0f,
+     -0.3f,-0.87f,0.0f,
+      0.8f,-1.0f,0.0f,
 
-     -0.2f,0.2f,0.0f,
-     -1.0f,0.8f,0.0f,
-     -0.8f,-0.8f,0.0f,
+       0.8f,-1.0f,0.0f,
+      0.87f,-0.5f,0.0f,
+     - 0.3f,-0.5f,0.0f,
 
-     -0.2f,0.2f,0.0f,
-     -1.0f,0.8f,0.0f,
-     -0.3f,0.5f,0.0f,
+      0.87f,-0.5f,0.0f,
+      1.0f,0.8f,0.0f,
+      0.1f,0.87f,0.0f,
 
-     -0.2f,0.2f,0.0f,
-     0.8f,1.0f,0.0f,
-     -0.3f,0.5f,0.0f,
+         0.87f,-0.5f,0.0f,
+         0.4f,-0.5f,0.0f,
+          -0.1f,0.55f,0.0f,////
 
-      -0.2f,0.2f,0.0f,
-     0.8f,1.0f,0.0f,
-     0.2f,0.2f,0.0f,
+              0.87f,-0.5f,0.0f,
+          -0.1f,0.55f,0.0f,////
+               0.4f,0.55f,0.0f,
 
-     1.0f,-1.0f,0.0f,
-     0.8f,1.0f,0.0f,
-     0.2f,0.2f,0.0f,
 
-          1.0f,-1.0f,0.0f,
-     0.2f,-1.0f,0.0f,
-     0.2f,0.2f,0.0f,
+
+     0.1f,0.87f,0.0f,
+    -0.9f,1.0f,0.0f,
+     -0.9f,0.0f,0.0f,
+
+      -0.9f,0.0f,0.0f,
+      -0.1f,0.87f,0.0f,
+      -0.1f,0.0f,0.0f,
+
+      0.3f,0.87f,0.0f,
+      0.3f,0.5f,0.0f,
+      -0.1f,0.5f,0.0f,
+
+         0.3f,0.87f,0.0f,
+         -0.1f,0.9f,0.0f,
+           -0.1f,0.5f,0.0f,
+
+
+
     };
-    drawSmth(colors, points, startx, starty, size, GL_TRIANGLES, 24);
+    drawSmth(colors, points, startx, starty, size, GL_TRIANGLES,30);
 }
 
 void drawPolygon2(GLfloat startx, GLfloat starty, GLfloat size) {
