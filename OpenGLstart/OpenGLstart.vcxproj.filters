@@ -30,6 +30,7 @@
     <None Include="..\..\..\Downloads\FragmentShader.glsl">
       <Filter>Исходные файлы</Filter>
     </None>
+    <None Include="ClassDiagram.cd" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\..\Downloads\ShaderFuncs.h">
