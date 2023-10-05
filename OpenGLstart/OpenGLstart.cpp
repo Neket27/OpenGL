@@ -72,38 +72,54 @@ void drawSmth(GLuint stm, GLuint shader_programme) {
 	glm::mat4 transformMatrix = glm::mat4(1.0f);
 	
 		glUniformMatrix4fv(stm, 1, GL_FALSE, &transformMatrix[0][0]);
+
+		//БУФЕРЫ
 		GLuint coords_vbo = 0;
 		glGenBuffers(1, &coords_vbo);
 		glBindBuffer(GL_ARRAY_BUFFER, coords_vbo);
 		glBufferData(GL_ARRAY_BUFFER, sizeof(points), points,
 			GL_STATIC_DRAW);
+
 		GLuint colors_vbo = 0;
 		glGenBuffers(1, &colors_vbo);
 		glBindBuffer(GL_ARRAY_BUFFER, colors_vbo);
 		glBufferData(GL_ARRAY_BUFFER, sizeof(colors),
 			colors, GL_STATIC_DRAW);
+
 		GLuint elementbuffer;
 		glGenBuffers(1, &elementbuffer);
 		glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, elementbuffer);
-		
 		glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(indices), indices, GL_STATIC_DRAW);
+		// end БУФЕРЫ
+		
+///////////////////////////////////////////////////////////////////////////////////////////////////
+
+		//Массив
 		GLuint vao = 0;
-		glGenVertexArrays(1, &vao);
-		glBindVertexArray(vao);
+		glGenVertexArrays(1, &vao); //создаёт массив вершин и помещает его идентификатор в переданный параметр
+		glBindVertexArray(vao); //устанавливает выбранный массив вершин в качестве текущего
 		glBindBuffer(GL_ARRAY_BUFFER, coords_vbo);
-		glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 0, NULL);
+		glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 0, NULL); //// потом будем включать массив 1 (связывает активный массив вершин с активным буфером и присваивает ему индекс, переданный в качестве первого параметра.)
+		
 		glBindBuffer(GL_ARRAY_BUFFER, colors_vbo);
-		glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, 0, NULL);
-		glEnableVertexAttribArray(0);
-		glEnableVertexAttribArray(1);
+		glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, 0, NULL); // потом будем включать массив 1
+
+		glEnableVertexAttribArray(0); // включаем массив. (в данном случае характеристика только одна - координаты, так что используется индекс 0)
+		glEnableVertexAttribArray(1); //включаем массив. (в данном случае характеристики только две - координаты и цвета, так что используется индекс 1)
+
 		glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, elementbuffer);
-		glDrawElements(GL_TRIANGLES, sizeof(indices) / sizeof(GLuint),
-			GL_UNSIGNED_INT, 0);
+		// end массивы
+
+		//Отрисовка
+		glDrawElements(GL_TRIANGLES, sizeof(indices) / sizeof(GLuint),GL_UNSIGNED_INT, 0);
+		// end Отрисовка
+
+		//Освобождение памяти
 		glDeleteVertexArrays(1, &vao);
 		glDeleteBuffers(1, &coords_vbo);
 		glDeleteBuffers(1, &colors_vbo);
 		glDeleteBuffers(1, &elementbuffer);
-
+		// end Освобождение памяти
 }
 
 
