@@ -39,7 +39,8 @@ int WinHeight = 480;
 void glfw_window_size_callback(GLFWwindow* window, int width, int height);
 void drawSmth(dataPoint dataPoints, std::vector<GLuint> indexes, glm::mat4 transformMatrix, GLuint shader_programme, GLenum type);
 void task1(GLuint shader_programme);
-void ff(GLint shader_programme);
+void task_1_a(GLint shader_programme);
+void task_1_b(GLint shader_programme);
 
 int main() {
 	glfwInit();
@@ -67,9 +68,9 @@ int main() {
 		glViewport(0, 0, WinWidth, WinHeight);
 		glClear(GL_COLOR_BUFFER_BIT);
 		glUseProgram(shader_programme);
-		//drawHexagonDots(-0.75f, 0.75f, 0.2f);
-		ff(shader_programme);
-		//task1(shader_programme);
+
+		task_1_a(shader_programme);
+	//	task_1_b(shader_programme);
 
 
 		glfwSwapBuffers(window);
@@ -137,24 +138,76 @@ void drawSmth(dataPoint dataPoints, std::vector<GLuint> indexes, glm::mat4 trans
 
 
 
-void ff(GLint shader_programme) {
-	std::vector<GLuint> indexes = { 0, 1, 2, 2, 3, 0 };
+void task_1_a(GLint shader_programme) {
+	std::vector<GLuint> indexes = { 
+					   0,1,2,
+					   0,1,3,
+					   0,1,4,
+					   0,2,3,
+					   0,2,4,
+					   0,3,4,
+					   1,2,3,
+					   1,2,4,
+					   1,3,4,
+					   2,3,4,
+
+	};
 
 	dataPoint dataPoints;
 	dataPoints.addCoordinates({ 0.0f, 0.5f, 0.0f });
 	dataPoints.addCoordinates({ 0.5f, 0.0f, 0.0f });
 	dataPoints.addCoordinates({ 0.0f, -0.5f, 1.0f });
 	dataPoints.addCoordinates({ -0.5f, 0.0f, 0.0f });
+	dataPoints.addCoordinates({ -1.0f, 0.0f, 0.0f });
 
 	dataPoints.addColors({ 1.0f, 0.0f, 0.0f });
 	dataPoints.addColors({ 0.0f, 1.0f, 0.0f });
 	dataPoints.addColors({ 0.0f, 0.0f, 1.0f });
 	dataPoints.addColors({ 1.0f, 1.0f, 0.0f });
+	dataPoints.addColors({ 1.0f, 1.0f, 1.0f });
 
 	glPolygonMode(GL_FRONT_AND_BACK, GL_LINE); // отрисовка только граний
 	glm::mat4 transformMatrix = glm::mat4(1.0f);
 	drawSmth(dataPoints, indexes, transformMatrix, shader_programme, GL_TRIANGLES);
-
-
 }
 
+
+void task_1_b(GLint shader_programme) {
+	std::vector<GLuint> indexes = {
+				0,1,
+				0,2,
+				0,3,
+				0,4,
+				0,5,
+				1,2,
+				1,3,
+				1,4,
+				1,5,
+				2,3,
+				2,4,
+				2,5,
+				3,4,
+				3,5,
+				4,5
+
+	};
+
+	dataPoint dataPoints;
+	dataPoints.addCoordinates({ 0.0f, 0.5f, 0.0f });
+	dataPoints.addCoordinates({ 0.5f, 0.0f, 0.0f });
+	dataPoints.addCoordinates({ 0.0f, -0.5f, 1.0f });
+	dataPoints.addCoordinates({ -0.5f, 0.0f, 0.0f });
+	dataPoints.addCoordinates({ -1.0f, 0.0f, 0.0f });
+	dataPoints.addCoordinates({ 0.0f, 1.0f, 0.0f });
+
+	dataPoints.addColors({ 1.0f, 0.0f, 0.0f });
+	dataPoints.addColors({ 0.0f, 1.0f, 0.0f });
+	dataPoints.addColors({ 0.0f, 0.0f, 1.0f });
+	dataPoints.addColors({ 1.0f, 1.0f, 0.0f });
+	dataPoints.addColors({ 1.0f, 1.0f, 1.0f });
+	dataPoints.addColors({ 0.4f, 1.0f, 0.7f });
+
+	glPolygonMode(GL_FRONT_AND_BACK, GL_LINE); // отрисовка только граний
+	glm::mat4 transformMatrix = glm::mat4(1.0f);
+	drawSmth(dataPoints, indexes, transformMatrix, shader_programme, GL_LINES);
+}
