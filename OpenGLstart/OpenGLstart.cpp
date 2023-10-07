@@ -41,6 +41,8 @@ void drawSmth(dataPoint dataPoints, std::vector<GLuint> indexes, glm::mat4 trans
 void task1(GLuint shader_programme);
 void task_1_a(GLint shader_programme);
 void task_1_b(GLint shader_programme);
+void task_2(GLint shader_programme, bool trueOrFalse);
+
 
 int main() {
 	glfwInit();
@@ -69,8 +71,9 @@ int main() {
 		glClear(GL_COLOR_BUFFER_BIT);
 		glUseProgram(shader_programme);
 
-		task_1_a(shader_programme);
+		//task_1_a(shader_programme);
 	//	task_1_b(shader_programme);
+		task_2(shader_programme, true);
 
 
 		glfwSwapBuffers(window);
@@ -210,4 +213,59 @@ void task_1_b(GLint shader_programme) {
 	glPolygonMode(GL_FRONT_AND_BACK, GL_LINE); // отрисовка только граний
 	glm::mat4 transformMatrix = glm::mat4(1.0f);
 	drawSmth(dataPoints, indexes, transformMatrix, shader_programme, GL_LINES);
+}
+
+
+void task_2(GLint shader_programme, bool trueOrFalse) {
+	glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
+
+	dataPoint dataPoints;
+	dataPoints.addCoordinates({ -0.7f,0.3f,0.0f });
+	dataPoints.addCoordinates({ -1.0f,-0.3f,0.0f });
+	dataPoints.addCoordinates({ -0.4f,-0.3f,0.0f });
+	dataPoints.addColors({ 1.0f,0.0f,0.0f });
+	dataPoints.addColors({ 0.0f,1.0f,0.0f });
+	dataPoints.addColors({ 0.0f,0.0f,1.0f });
+	std::vector<GLuint> indexes1 = { 0,1,2 };
+
+
+	glm::mat4 transformMatrix = glm::mat4(1.0f);
+	glm::vec3 vector_P = { 0.03f,0.15f,0.0f };
+	glm::vec3 scale = { 1.2f,1.5f,0.0f };
+	
+	if (trueOrFalse) {
+	//зд:	треугольник следует смасштабировать с коэффициентами(kx, ky) и перенести на вектор p;
+		transformMatrix = glm::translate(transformMatrix, vector_P); // перенос на вектор p
+		transformMatrix = glm::scale(transformMatrix, scale); // маштабирование
+	}
+	drawSmth(dataPoints, indexes1, transformMatrix, shader_programme, GL_TRIANGLES);
+
+	dataPoint dataPoints2;
+	dataPoints2.addCoordinates({ 0.0f,0.5f,0.0f });
+	dataPoints2.addCoordinates({ 0.0f,-0.5f,0.0f });
+	dataPoints2.addColors({ 1.0f,0.0f,0.0f });
+	dataPoints2.addColors({ 0.0f,1.0f,0.0f });
+	std::vector<GLuint> indexes2 = { 0,1 };
+
+	transformMatrix = glm::mat4(1.0f);
+	if (trueOrFalse) transformMatrix = glm::rotate(transformMatrix, glm::radians(40.0f), glm::vec3(0.0, 0.0, 1.0));
+	drawSmth(dataPoints2,indexes2, transformMatrix, shader_programme, GL_LINES);
+
+
+	dataPoint dataPoints3;
+
+	dataPoints3.addCoordinates({ 0.4f,0.5f,0.0f });
+	dataPoints3.addCoordinates({ 0.7f,0.5f,0.0f });
+	dataPoints3.addCoordinates({ 0.4f,-0.5f,0.0f });
+	dataPoints3.addCoordinates({ 0.7f,-0.5f,0.0f });
+	dataPoints3.addColors({ 1.0f,0.0f,0.0f });
+	dataPoints3.addColors({ 1.0f,0.0f,0.0f });
+	dataPoints3.addColors({ 1.0f,0.0f,0.0f });
+	dataPoints3.addColors({ 1.0f,0.0f,0.0f });
+	std::vector<GLuint> indexes3 = { 0,1,2,2,1,3 };
+
+	transformMatrix = glm::mat4(1.0f);
+	if (trueOrFalse) transformMatrix = glm::rotate(transformMatrix, glm::radians(-25.0f), glm::vec3(-0.1, 0.3, 1.0));
+	drawSmth(dataPoints3, indexes3, transformMatrix, shader_programme, GL_TRIANGLES);
+
 }
