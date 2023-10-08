@@ -5,6 +5,36 @@
 #include "glm/glm.hpp"
 #include "glm/gtc/matrix_transform.hpp"
 #include <vector>
+#include <chrono>
+#include <functional>
+#include <thread>
+
+
+class Timer {
+public:
+	/*void add(std::chrono::milliseconds delay,
+		std::function<void(GLuint shader_programme)> callback,
+		bool asynchronous = true);*/
+
+	Timer(GLuint shader_programme) : shader_programme(shader_programme) {}
+	void add(std::chrono::milliseconds delay, std::function<void(GLuint shader_programme)> callback, bool asynchronous) {
+		if (asynchronous) {
+			std::thread([=]() {
+				std::this_thread::sleep_for(std::chrono::milliseconds(delay));
+				callback(shader_programme); // Здесь передаем shader_programme в callback
+				}).detach();
+		}
+		else {
+			std::this_thread::sleep_for(std::chrono::milliseconds(delay));
+			callback(shader_programme); // Здесь передаем shader_programme в callback
+		}
+	}
+
+private:
+	GLuint shader_programme; // Добавьте поле для хранения shader_programme
+};
+
+
 
 struct dataPoint {
 	std::vector<glm::vec3> coordinates;
@@ -28,8 +58,6 @@ struct dataPoint {
 	glm::vec3* getColorsData() {
 		return colors.data();
 	}
-
-
 };
 
 
@@ -42,6 +70,7 @@ void task1(GLuint shader_programme);
 void task_1_a(GLint shader_programme);
 void task_1_b(GLint shader_programme);
 void task_2(GLint shader_programme, bool trueOrFalse);
+void task_3(GLint shader_programme);
 
 
 int main() {
@@ -60,7 +89,6 @@ int main() {
 	glLinkProgram(shader_programme);
 
 
-
 	while (!glfwWindowShouldClose(window)) {
 		glfwPollEvents();
 		if (GLFW_PRESS == glfwGetKey(window, GLFW_KEY_ESCAPE))
@@ -71,9 +99,22 @@ int main() {
 		glClear(GL_COLOR_BUFFER_BIT);
 		glUseProgram(shader_programme);
 
-		//task_1_a(shader_programme);
+		
+			
+		Timer timer(shader_programme);
+
+			timer.add(std::chrono::milliseconds(100), task_1_a, false);
+			
+
+			//task_1_b(shader_programme);
+		
+			//task_3(shader_programme);
+
+
+
 	//	task_1_b(shader_programme);
-		task_2(shader_programme, true);
+		//task_2(shader_programme, true);
+		//task_3(shader_programme);
 
 
 		glfwSwapBuffers(window);
@@ -218,11 +259,11 @@ void task_1_b(GLint shader_programme) {
 
 void task_2(GLint shader_programme, bool trueOrFalse) {
 	glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
-
+	
 	dataPoint dataPoints;
-	dataPoints.addCoordinates({ -0.7f,0.3f,0.0f });
-	dataPoints.addCoordinates({ -1.0f,-0.3f,0.0f });
-	dataPoints.addCoordinates({ -0.4f,-0.3f,0.0f });
+	dataPoints.addCoordinates({ -0.4f,0.2f,0.0f });
+	dataPoints.addCoordinates({ -0.6f,-0.3f,0.0f });
+	dataPoints.addCoordinates({ -0.2f,-0.3f,0.0f });
 	dataPoints.addColors({ 1.0f,0.0f,0.0f });
 	dataPoints.addColors({ 0.0f,1.0f,0.0f });
 	dataPoints.addColors({ 0.0f,0.0f,1.0f });
@@ -248,7 +289,7 @@ void task_2(GLint shader_programme, bool trueOrFalse) {
 	std::vector<GLuint> indexes2 = { 0,1 };
 
 	transformMatrix = glm::mat4(1.0f);
-	if (trueOrFalse) transformMatrix = glm::rotate(transformMatrix, glm::radians(40.0f), glm::vec3(0.0, 0.0, 1.0));
+	if (trueOrFalse) transformMatrix = glm::rotate(transformMatrix, glm::radians(40.0f), glm::vec3(0.0, 0.0, 1.0)); //поворачивает 3D вектор на заданный угол вокруг заданной оси(представленной орт - вектором) :
 	drawSmth(dataPoints2,indexes2, transformMatrix, shader_programme, GL_LINES);
 
 
@@ -258,14 +299,39 @@ void task_2(GLint shader_programme, bool trueOrFalse) {
 	dataPoints3.addCoordinates({ 0.7f,0.5f,0.0f });
 	dataPoints3.addCoordinates({ 0.4f,-0.5f,0.0f });
 	dataPoints3.addCoordinates({ 0.7f,-0.5f,0.0f });
-	dataPoints3.addColors({ 1.0f,0.0f,0.0f });
-	dataPoints3.addColors({ 1.0f,0.0f,0.0f });
-	dataPoints3.addColors({ 1.0f,0.0f,0.0f });
-	dataPoints3.addColors({ 1.0f,0.0f,0.0f });
+	dataPoints3.addColors({ 0.1f,0.1f,0.9f });
+	dataPoints3.addColors({ 0.7f,0.1f,0.0f });
+	dataPoints3.addColors({ 0.7f,0.1f,0.0f });
+	dataPoints3.addColors({ 0.1f,0.1f,0.9f });
 	std::vector<GLuint> indexes3 = { 0,1,2,2,1,3 };
-
+	
 	transformMatrix = glm::mat4(1.0f);
-	if (trueOrFalse) transformMatrix = glm::rotate(transformMatrix, glm::radians(-25.0f), glm::vec3(-0.1, 0.3, 1.0));
+	if (trueOrFalse) transformMatrix = glm::rotate(transformMatrix, glm::radians(-25.0f), glm::vec3(-0.3, -0.8, 1.0)); //поворачивает 3D вектор на заданный угол вокруг заданной оси(представленной орт - вектором) :
 	drawSmth(dataPoints3, indexes3, transformMatrix, shader_programme, GL_TRIANGLES);
+
+}
+
+
+void task_3(GLint shader_programme) {
+	dataPoint dataPoints;
+	dataPoints.addCoordinates({ 0.0f,0.0f,0.0f });
+	dataPoints.addCoordinates({ 0.0f,0.5f,0.0f });
+	dataPoints.addColors({ 1.0f,0.0f,0.0f });
+	dataPoints.addColors({ 0.0f,1.0f,0.0f });
+	std::vector<GLuint> indexes = { 0,1 };
+
+	glm::mat4 transformMatrix = glm::mat4(1.0f);
+	drawSmth(dataPoints, indexes, transformMatrix, shader_programme, GL_LINES);
+	transformMatrix = glm::rotate(transformMatrix, glm::radians(45.0f), glm::vec3(0.0, 0.0, 1.0)); //поворачивает 3D вектор на заданный угол вокруг заданной оси(представленной орт - вектором) :
+	drawSmth(dataPoints, indexes, transformMatrix, shader_programme, GL_LINES);
+	transformMatrix = glm::rotate(transformMatrix, glm::radians(90.0f), glm::vec3(0.0, 0.0, 1.0)); //поворачивает 3D вектор на заданный угол вокруг заданной оси(представленной орт - вектором) :
+	drawSmth(dataPoints, indexes, transformMatrix, shader_programme, GL_LINES);
+	transformMatrix = glm::rotate(transformMatrix, glm::radians(45.0f), glm::vec3(0.0, 0.0, 1.0)); //поворачивает 3D вектор на заданный угол вокруг заданной оси(представленной орт - вектором) :
+	drawSmth(dataPoints, indexes, transformMatrix, shader_programme, GL_LINES);
+	transformMatrix = glm::rotate(transformMatrix, glm::radians(45.0f), glm::vec3(0.0, 0.0, 1.0)); //поворачивает 3D вектор на заданный угол вокруг заданной оси(представленной орт - вектором) :
+	drawSmth(dataPoints, indexes, transformMatrix, shader_programme, GL_LINES);
+	transformMatrix = glm::rotate(transformMatrix, glm::radians(90.0f), glm::vec3(0.0, 0.0, 1.0)); //поворачивает 3D вектор на заданный угол вокруг заданной оси(представленной орт - вектором) :
+	drawSmth(dataPoints, indexes, transformMatrix, shader_programme, GL_LINES);
+
 
 }
