@@ -10,28 +10,41 @@
 #include <thread>
 
 
-class Timer {
+class TimerView {
 public:
-	/*void add(std::chrono::milliseconds delay,
-		std::function<void(GLuint shader_programme)> callback,
-		bool asynchronous = true);*/
 
-	Timer(GLuint shader_programme) : shader_programme(shader_programme) {}
-	void add(std::chrono::milliseconds delay, std::function<void(GLuint shader_programme)> callback, bool asynchronous) {
-		if (asynchronous) {
-			std::thread([=]() {
-				std::this_thread::sleep_for(std::chrono::milliseconds(delay));
-				callback(shader_programme); // Здесь передаем shader_programme в callback
-				}).detach();
-		}
-		else {
-			std::this_thread::sleep_for(std::chrono::milliseconds(delay));
+	TimerView(GLuint shader_programme, GLFWwindow* window) : shader_programme(shader_programme),window(window) {}
+
+	void add(std::chrono::milliseconds delay_ms, std::function<void(GLuint shader_programme)> callback) {
+			// Создаем объект std::chrono::milliseconds для задержки
+			glfwPollEvents();
+			glClear(GL_COLOR_BUFFER_BIT);
+			glUseProgram(shader_programme);
+
 			callback(shader_programme); // Здесь передаем shader_programme в callback
-		}
+			glfwSwapBuffers(window);
+			std::chrono::milliseconds delay(delay_ms);
+			std::this_thread::sleep_for(delay);
+
+	}
+
+
+	void add(std::chrono::milliseconds delay_ms, std::function<void(GLuint shader_programme, bool trueOrFalse)> callback, bool trueOrFalseFlag=false) {
+		// Создаем объект std::chrono::milliseconds для задержки
+		glfwPollEvents();
+		glClear(GL_COLOR_BUFFER_BIT);
+		glUseProgram(shader_programme);
+
+		callback(shader_programme, trueOrFalseFlag); // Здесь передаем shader_programme в callback
+		glfwSwapBuffers(window);
+		std::chrono::milliseconds delay(delay_ms);
+		std::this_thread::sleep_for(delay);
+
 	}
 
 private:
 	GLuint shader_programme; // Добавьте поле для хранения shader_programme
+	GLFWwindow* window;
 };
 
 
@@ -88,37 +101,17 @@ int main() {
 	glBindAttribLocation(shader_programme, 1, "vertex_colour");
 	glLinkProgram(shader_programme);
 
-
-	while (!glfwWindowShouldClose(window)) {
-		glfwPollEvents();
-		if (GLFW_PRESS == glfwGetKey(window, GLFW_KEY_ESCAPE))
-		{
-			glfwSetWindowShouldClose(window, 1);
-		}
-		glViewport(0, 0, WinWidth, WinHeight);
-		glClear(GL_COLOR_BUFFER_BIT);
-		glUseProgram(shader_programme);
-
-		
-			
-		Timer timer(shader_programme);
-
-			timer.add(std::chrono::milliseconds(100), task_1_a, false);
-			
-
-			//task_1_b(shader_programme);
-		
-			//task_3(shader_programme);
+	
+	glViewport(0, 0, WinWidth, WinHeight);
 
 
+	TimerView timerView(shader_programme,window);
+	timerView.add(std::chrono::milliseconds(4000), task_1_a);
+	timerView.add(std::chrono::milliseconds(4000), task_1_b);
+	timerView.add(std::chrono::milliseconds(4000), task_2);
+	timerView.add(std::chrono::milliseconds(4000), task_2,true);
+	timerView.add(std::chrono::milliseconds(4000), task_3);
 
-	//	task_1_b(shader_programme);
-		//task_2(shader_programme, true);
-		//task_3(shader_programme);
-
-
-		glfwSwapBuffers(window);
-	}
 	glfwTerminate();
 	return 0;
 }
