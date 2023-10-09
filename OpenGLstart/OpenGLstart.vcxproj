@@ -135,6 +135,7 @@
   <ItemGroup>
     <ClCompile Include="..\..\..\Downloads\ShaderFuncs.cpp" />
     <ClCompile Include="OpenGLstart.cpp" />
+    <ClCompile Include="TimerView.cpp" />
   </ItemGroup>
   <ItemGroup>
     <None Include="..\..\..\Downloads\FragmentShader.glsl" />
@@ -144,6 +145,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\..\Downloads\ShaderFuncs.h" />
+    <ClInclude Include="dataPoint.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

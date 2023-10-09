@@ -4,74 +4,9 @@
 #include "ShaderFuncs.h"
 #include "glm/glm.hpp"
 #include "glm/gtc/matrix_transform.hpp"
-#include <vector>
-#include <chrono>
-#include <functional>
-#include <thread>
+#include "TimerView.cpp"
+#include "dataPoint.h"
 
-
-class TimerView {
-public:
-
-	TimerView(GLuint shader_programme, GLFWwindow* window) : shader_programme(shader_programme),window(window) {}
-
-	void add(std::chrono::milliseconds delay_ms, std::function<void(GLuint shader_programme)> callback) {
-			// Создаем объект std::chrono::milliseconds для задержки
-			glfwPollEvents();
-			glClear(GL_COLOR_BUFFER_BIT);
-			glUseProgram(shader_programme);
-
-			callback(shader_programme); // Здесь передаем shader_programme в callback
-			glfwSwapBuffers(window);
-			std::chrono::milliseconds delay(delay_ms);
-			std::this_thread::sleep_for(delay);
-
-	}
-
-
-	void add(std::chrono::milliseconds delay_ms, std::function<void(GLuint shader_programme, bool trueOrFalse)> callback, bool trueOrFalseFlag=false) {
-		// Создаем объект std::chrono::milliseconds для задержки
-		glfwPollEvents();
-		glClear(GL_COLOR_BUFFER_BIT);
-		glUseProgram(shader_programme);
-
-		callback(shader_programme, trueOrFalseFlag); // Здесь передаем shader_programme в callback
-		glfwSwapBuffers(window);
-		std::chrono::milliseconds delay(delay_ms);
-		std::this_thread::sleep_for(delay);
-
-	}
-
-private:
-	GLuint shader_programme; // Добавьте поле для хранения shader_programme
-	GLFWwindow* window;
-};
-
-
-
-struct dataPoint {
-	std::vector<glm::vec3> coordinates;
-	std::vector<glm::vec3>  colors;
-	size_t sizeDataPoints;
-
-	void addCoordinates(glm::vec3 coordinate) {
-		coordinates.push_back(coordinate);
-		sizeDataPoints= (coordinates.size()) == 0 ? 0 : 3 * coordinates.size();
-	}
-
-	void addColors(glm::vec3 color) {
-		colors.push_back(color);
-	}
-	// Метод для получения указателя на данные координат
-	glm::vec3* getCoordinatesData() {
-		return coordinates.data();
-	}
-
-	// Метод для получения указателя на данные цветов
-	glm::vec3* getColorsData() {
-		return colors.data();
-	}
-};
 
 
 int WinWidth = 640;
