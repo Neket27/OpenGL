@@ -34,6 +34,9 @@
       <Filter>Исходные файлы</Filter>
     </None>
     <None Include="ClassDiagram.cd" />
+    <None Include="..\..\lr3.docx">
+      <Filter>Файлы заголовков</Filter>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\..\Downloads\ShaderFuncs.h">

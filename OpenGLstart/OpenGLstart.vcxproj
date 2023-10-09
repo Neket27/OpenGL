@@ -140,6 +140,7 @@
   <ItemGroup>
     <None Include="..\..\..\Downloads\FragmentShader.glsl" />
     <None Include="..\..\..\Downloads\VertexShader.glsl" />
+    <None Include="..\..\lr3.docx" />
     <None Include="ClassDiagram.cd" />
     <None Include="packages.config" />
   </ItemGroup>
