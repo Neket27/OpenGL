@@ -14,7 +14,6 @@ int WinHeight = 480;
 
 void glfw_window_size_callback(GLFWwindow* window, int width, int height);
 void drawSmth(dataPoint dataPoints, std::vector<GLuint> indexes, glm::mat4 transformMatrix, GLuint shader_programme, GLenum type);
-void task1(GLuint shader_programme);
 void task_1_a(GLint shader_programme);
 void task_1_b(GLint shader_programme);
 void task_2(GLint shader_programme, bool trueOrFalse);
