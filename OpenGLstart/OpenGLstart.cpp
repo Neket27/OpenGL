@@ -18,6 +18,7 @@ void task_1_a(GLint shader_programme);
 void task_1_b(GLint shader_programme);
 void task_2(GLint shader_programme, bool trueOrFalse);
 void task_3(GLint shader_programme);
+void drawSmth2(GLuint shader_programme);
 
 
 int main() {
@@ -36,15 +37,31 @@ int main() {
 	glLinkProgram(shader_programme);
 
 	
-	glViewport(0, 0, WinWidth, WinHeight);
+	//glViewport(0, 0, WinWidth, WinHeight);
 
 
-	TimerView timerView(shader_programme,window);
+	/*TimerView timerView(shader_programme,window);
 	timerView.add(std::chrono::milliseconds(4000), task_1_a);
 	timerView.add(std::chrono::milliseconds(4000), task_1_b);
 	timerView.add(std::chrono::milliseconds(4000), task_2);
 	timerView.add(std::chrono::milliseconds(4000), task_2,true);
-	timerView.add(std::chrono::milliseconds(4000), task_3);
+	timerView.add(std::chrono::milliseconds(4000), task_3);*/
+
+	while (!glfwWindowShouldClose(window)) {
+		glfwPollEvents();
+		if (GLFW_PRESS == glfwGetKey(window, GLFW_KEY_ESCAPE))
+		{
+			glfwSetWindowShouldClose(window, 1);
+		}
+		glViewport(0, 0, WinWidth, WinHeight);
+		glClear(GL_COLOR_BUFFER_BIT);
+		glUseProgram(shader_programme);
+
+		drawSmth2(shader_programme);
+		
+
+		glfwSwapBuffers(window);
+	}
 
 	glfwTerminate();
 	return 0;
@@ -261,4 +278,140 @@ void task_3(GLint shader_programme) {
 	drawSmth(dataPoints, indexes, transformMatrix, shader_programme, GL_LINES);
 
 
+}
+
+void drawSmth2(GLuint shader_programme) {
+	glShadeModel(GL_FLAT);
+	glEnable(GL_CULL_FACE);
+
+	GLfloat cubeVertexArray[8][3];
+	GLfloat cubeColorArray[8][3];
+	GLubyte cubeIndexArray[6][4];
+
+	cubeVertexArray[0][0] = 0.0;
+	cubeVertexArray[0][1] = 0.0;
+	cubeVertexArray[0][2] = 1.0;
+	cubeVertexArray[1][0] = 0.0;
+	cubeVertexArray[1][1] = 1.0;
+	cubeVertexArray[1][2] = 1.0;
+	cubeVertexArray[2][0] = 1.0;
+	cubeVertexArray[2][1] = 1.0;
+	cubeVertexArray[2][2] = 1.0;
+	cubeVertexArray[3][0] = 1.0;
+	cubeVertexArray[3][1] = 0.0;
+	cubeVertexArray[3][2] = 1.0;
+	cubeVertexArray[4][0] = 0.0;
+	cubeVertexArray[4][1] = 0.0;
+	cubeVertexArray[4][2] = 0.0;
+	cubeVertexArray[5][0] = 0.0;
+	cubeVertexArray[5][1] = 1.0;
+	cubeVertexArray[5][2] = 0.0;
+	cubeVertexArray[6][0] = 1.0;
+	cubeVertexArray[6][1] = 1.0;
+	cubeVertexArray[6][2] = 0.0;
+	cubeVertexArray[7][0] = 1.0;
+	cubeVertexArray[7][1] = 0.0;
+	cubeVertexArray[7][2] = 0.0;
+
+	cubeColorArray[0][0] = 0.0;
+	cubeColorArray[0][1] = 0.0;
+	cubeColorArray[0][2] = 1.0;
+	cubeColorArray[1][0] = 0.6;
+	cubeColorArray[1][1] = 0.98;
+	cubeColorArray[1][2] = 0.6;
+	cubeColorArray[2][0] = 1.0;
+	cubeColorArray[2][1] = 0.84;
+	cubeColorArray[2][2] = 0.8;
+	cubeColorArray[3][0] = 0.8;
+	cubeColorArray[3][1] = 0.36;
+	cubeColorArray[3][2] = 0.36;
+	cubeColorArray[4][0] = 1.0;
+	cubeColorArray[4][1] = 0.27;
+	cubeColorArray[4][2] = 0.0;
+	cubeColorArray[5][0] = 0.82;
+	cubeColorArray[5][1] = 0.13;
+	cubeColorArray[5][2] = 0.56;
+	cubeColorArray[6][0] = 0.54;
+	cubeColorArray[6][1] = 0.17;
+	cubeColorArray[6][2] = 0.89;
+	cubeColorArray[7][0] = 0.0;
+	cubeColorArray[7][1] = 1.0;
+	cubeColorArray[7][2] = 1.0;
+
+	cubeIndexArray[0][0] = 0;
+	cubeIndexArray[0][1] = 3;
+	cubeIndexArray[0][2] = 2;
+	cubeIndexArray[0][3] = 1;
+	cubeIndexArray[1][0] = 0;
+	cubeIndexArray[1][1] = 1;
+	cubeIndexArray[1][2] = 5;
+	cubeIndexArray[1][3] = 4;
+	cubeIndexArray[2][0] = 7;
+	cubeIndexArray[2][1] = 4;
+	cubeIndexArray[2][2] = 5;
+	cubeIndexArray[2][3] = 6;
+	cubeIndexArray[3][0] = 3;
+	cubeIndexArray[3][1] = 7;
+	cubeIndexArray[3][2] = 6;
+	cubeIndexArray[3][3] = 2;
+	cubeIndexArray[4][0] = 1;
+	cubeIndexArray[4][1] = 2;
+	cubeIndexArray[4][2] = 6;
+	cubeIndexArray[4][3] = 5;
+	cubeIndexArray[5][0] = 0;
+	cubeIndexArray[5][1] = 4;
+	cubeIndexArray[5][2] = 7;
+	cubeIndexArray[5][3] = 3;
+
+	glVertexPointer(3, GL_FLOAT, 0, cubeVertexArray);
+	glColorPointer(3, GL_FLOAT, 0, cubeColorArray);
+	glDrawElements(GL_QUADS, 24, GL_UNSIGNED_BYTE, cubeIndexArray);
+	
+
+	glm::mat4 transformMatrix = glm::mat4(1.0f);
+	
+	GLuint stm = glGetUniformLocation(shader_programme, "transform");
+	glUniformMatrix4fv(stm, 1, GL_FALSE, &transformMatrix[0][0]);
+
+	//БУФЕРЫ
+	GLuint coords_vbo = 0;
+	glGenBuffers(1, &coords_vbo);
+	glBindBuffer(GL_ARRAY_BUFFER, coords_vbo);
+	glBufferData(GL_ARRAY_BUFFER, 8*3 * sizeof(GLfloat), cubeVertexArray, GL_STATIC_DRAW);
+
+	GLuint colors_vbo = 0;
+	glGenBuffers(1, &colors_vbo);
+	glBindBuffer(GL_ARRAY_BUFFER, colors_vbo);
+	glBufferData(GL_ARRAY_BUFFER, 8*3 * sizeof(GLfloat), cubeColorArray, GL_STATIC_DRAW);
+
+	GLuint elementbuffer;
+	glGenBuffers(1, &elementbuffer);
+	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, elementbuffer);
+	glBufferData(GL_ELEMENT_ARRAY_BUFFER, 6*4 * sizeof(GLuint), cubeIndexArray, GL_STATIC_DRAW);
+	// end БУФЕРЫ
+
+	//Массив
+	GLuint vao = 0;
+	glGenVertexArrays(1, &vao);
+	glBindVertexArray(vao);
+	glBindBuffer(GL_ARRAY_BUFFER, coords_vbo);
+	glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 0, NULL);
+	glBindBuffer(GL_ARRAY_BUFFER, colors_vbo);
+	glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, 0, NULL);
+	glEnableVertexAttribArray(0);
+	glEnableVertexAttribArray(1);
+	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, elementbuffer);
+	// end массивы
+
+	//Отрисовка
+	glDrawElements(GL_LINES, 24, GL_UNSIGNED_INT, 0);
+	// end Отрисовка
+
+
+	//Освобождение памяти
+	glDeleteVertexArrays(1, &vao);
+	glDeleteBuffers(1, &coords_vbo);
+	glDeleteBuffers(1, &colors_vbo);
+	glDeleteBuffers(1, &elementbuffer);
+	// end Освобождение памяти
 }
