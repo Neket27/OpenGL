@@ -135,12 +135,11 @@
   <ItemGroup>
     <ClCompile Include="..\..\..\Downloads\ShaderFuncs.cpp" />
     <ClCompile Include="OpenGLstart.cpp" />
-    <ClCompile Include="TimerView.cpp" />
   </ItemGroup>
   <ItemGroup>
     <None Include="..\..\..\Downloads\FragmentShader.glsl" />
     <None Include="..\..\..\Downloads\VertexShader.glsl" />
-    <None Include="..\..\lr3.docx" />
+    <None Include="..\..\lr4.docx" />
     <None Include="ClassDiagram.cd" />
     <None Include="packages.config" />
   </ItemGroup>

@@ -4,7 +4,6 @@
 #include "ShaderFuncs.h"
 #include "glm/glm.hpp"
 #include "glm/gtc/matrix_transform.hpp"
-#include "TimerView.cpp"
 #include "dataPoint.h"
 
 
@@ -24,7 +23,6 @@ void task_3(GLuint shader_programme);
 void task_4(GLuint shader_programme);
 void task_5(GLuint shader_programme);
 void task_6(GLuint shader_programme);
-void drawSmth2(glm::vec3 colors[], glm::vec3 points[], GLuint indexes[], glm::mat4 transformMatrix, GLuint shader_programme, GLenum type, int n, int ind);
 void drawCube(GLfloat size, glm::mat4 transformMatrix1, GLuint shader_programme);
 
 

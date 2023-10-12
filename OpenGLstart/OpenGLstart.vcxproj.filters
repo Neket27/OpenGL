@@ -21,9 +21,6 @@
     <ClCompile Include="..\..\..\Downloads\ShaderFuncs.cpp">
       <Filter>Исходные файлы</Filter>
     </ClCompile>
-    <ClCompile Include="TimerView.cpp">
-      <Filter>Исходные файлы</Filter>
-    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
@@ -34,8 +31,8 @@
       <Filter>Исходные файлы</Filter>
     </None>
     <None Include="ClassDiagram.cd" />
-    <None Include="..\..\lr3.docx">
-      <Filter>Файлы заголовков</Filter>
+    <None Include="..\..\lr4.docx">
+      <Filter>Файлы ресурсов</Filter>
     </None>
   </ItemGroup>
   <ItemGroup>
