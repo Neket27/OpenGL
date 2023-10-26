@@ -134,18 +134,21 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="..\..\..\Downloads\ShaderFuncs.cpp" />
+    <ClCompile Include="Object.cpp" />
+    <ClCompile Include="OBJloader.cpp" />
     <ClCompile Include="OpenGLstart.cpp" />
   </ItemGroup>
   <ItemGroup>
     <None Include="..\..\..\Downloads\FragmentShader.glsl" />
     <None Include="..\..\..\Downloads\VertexShader.glsl" />
-    <None Include="..\..\lr4.docx" />
     <None Include="ClassDiagram.cd" />
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\..\Downloads\ShaderFuncs.h" />
     <ClInclude Include="dataPoint.h" />
+    <ClInclude Include="Object.h" />
+    <ClInclude Include="OBJloader.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
