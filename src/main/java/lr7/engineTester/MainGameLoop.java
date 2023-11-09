@@ -66,13 +66,7 @@ public class MainGameLoop {
                         0, 0, 0,
                         1.0f);
             }
-               // entity.increacePosition(-0.1f, 0, 0);
-//            else if(Keyboard.isKeyDown(GLFW.GLFW_KEY_D))
-//            //    entity.increacePosition(0.1f, 0, 0);
-//            if (Mouse.isButtonDown(GLFW.GLFW_MOUSE_BUTTON_LEFT))
-//             //   entity.increaseRotation(0, 0, 1);
-//            else if (Mouse.isButtonDown(GLFW.GLFW_MOUSE_BUTTON_RIGHT))
-//             //   entity.increaseRotation(0, 0, -1);
+
 
             renderer.prepare(); // подготовка окна для рисования кадра
             
