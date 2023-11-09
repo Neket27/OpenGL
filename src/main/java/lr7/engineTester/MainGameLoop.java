@@ -77,7 +77,7 @@ public class MainGameLoop {
             renderer.prepare(); // подготовка окна для рисования кадра
             
             shader.start(); // запускаем шейдер статических моделей
-            renderer.render(entity, shader); // рисуем объект
+            renderer.render(staticModel); // рисуем объект
             shader.stop(); // останавливаем шейдер статических моделей
             
             DisplayManager.updateDisplay();

@@ -25,11 +25,11 @@ public class StaticShader extends ShaderProgram {
         super.bindAttribute(1, "textureCoords");
     }
 
-    @Override
-    protected void getAllUniformLocations() {
-        // регестрируем юниформу
-        location_transformationMatrix = super.getUniformLocation("transformationMatrix");
-    }
+//    @Override
+//    protected void getAllUniformLocations() {
+//        // регестрируем юниформу
+//        location_transformationMatrix = super.getUniformLocation("transformationMatrix");
+//    }
     
     /**
      * Загрузка данных, матрицы трансформации, в юниформу

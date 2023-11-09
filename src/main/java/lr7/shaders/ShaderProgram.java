@@ -56,22 +56,22 @@ public abstract class ShaderProgram {
         if(GL20.glGetProgrami(programId, GL20.GL_VALIDATE_STATUS) == GL11.GL_FALSE)
             System.err.println("Ошибка проверки шейдерной программы: " + GL20.glGetProgramInfoLog(programId, 1024));
         
-        getAllUniformLocations();
+       // getAllUniformLocations();
     }
     
     /**
      * Получение всех юниформ
      */
-    protected abstract void getAllUniformLocations();
+   // protected abstract void getAllUniformLocations();
     
     /**
      * Регистрируем имя юниформы для шейдерной программы
      * @param uniformName имя юниформы
      * @return идентификатор юниформы
      */
-    protected int getUniformLocation(String uniformName) {
-        return GL20.glGetUniformLocation(programId, uniformName);
-    }
+//    protected int getUniformLocation(String uniformName) {
+//        return GL20.glGetUniformLocation(programId, uniformName);
+//    }
     
     /**
      * Подключение атрибутов
