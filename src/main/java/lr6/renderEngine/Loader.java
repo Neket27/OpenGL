@@ -1,7 +1,6 @@
 package lr6.renderEngine;
 
-
-import org.example.texture.Texture;
+import lr6.textures.Texture;
 import org.lwjgl.BufferUtils;
 import org.lwjgl.opengl.GL11;
 import org.lwjgl.opengl.GL15;

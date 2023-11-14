@@ -1,6 +1,4 @@
-package lr6.Primitives;
-
-import java.util.List;
+package lr6.primitives;
 
 public class Sphere {
    private float radius;
