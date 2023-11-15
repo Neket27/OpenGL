@@ -2,6 +2,7 @@
 
 
  import lr6.entities.Camera;
+ import lr6.entities.Light;
  import lr6.primitives.Sphere;
  import lr6.entities.Entity;
  import lr6.io.Keyboard;
@@ -54,27 +55,31 @@ public class MainGameLoop {
 
 
 
-        Sphere sphere= new Sphere(1.3f, 100, 100);
+        Sphere sphere= new Sphere(3.4f, 100, 100);
 
         // загружаем массив вершин, текстурных координат и индексов в память GPU
      //   RawModel model = loader.loadToVao(vertices, textureCoords, indices);
-        RawModel model = loader.loadToVao(sphere.getVertices(), sphere.getTextureCoords(), sphere.getIndices());
+        RawModel model = loader.loadToVao(sphere.getVertices(), sphere.getTextureCoords(),sphere.getNormalsArray() ,sphere.getIndices());
         // загружаем модель в память OpenGL
-      //  RawModel model = OBJLoader.loadObjModel("res/tutorial10/stall.obj", loader);
+       // RawModel model = OBJLoader.loadObjModel("res/tutorial11/dragon.obj", loader);
 
 
         // загрузим текстуру используя загрузчик
-        ModelTexture texture = new ModelTexture(loader.loadTexture("res/textuteSphere.png",false));
+        ModelTexture texture = new ModelTexture(loader.loadTexture("res/tutorial11/dragon.png",false));
         // Создание текстурной модели
         TexturedModel staticModel = new TexturedModel(model, texture);
 
         Entity entity = new Entity(staticModel,
-                new Vector3f(0, 0, -5f),
+                new Vector3f(8, 3.8f, -1.7f),
                 0, 0, 0,
                 1.0f);
 
-        Camera camera = new Camera();
-        
+        Camera camera = new Camera(0,0,20);
+        // создание источника света
+       // Light light = new Light(new Vector3f(0, 10, -20), new Vector3f(1.0f, 1, 1.0f));
+        Light light = new Light(new Vector3f(0.2f, 0.7f, 0.1f), new Vector3f(1.0f, 0.0f, 1.0f));
+
+
         // запускаем цикл пока пользователь не закроет окно
         while (DisplayManager.shouldDisplayClose()) {
             entity.increaseRotation(0, 1, 0);
@@ -82,6 +87,7 @@ public class MainGameLoop {
             renderer.prepare(); // подготовка окна для рисования кадра
 
             shader.start(); // запускаем шейдер статических моделей
+            shader.loadLight(light); //загружаем в шейдер источник света
             shader.loadViewMatrix(camera); // обновляем матрицу вида относительно положения камеры
             renderer.render(entity, shader); // рисуем объект
             shader.stop(); // останавливаем шейдер статических моделей

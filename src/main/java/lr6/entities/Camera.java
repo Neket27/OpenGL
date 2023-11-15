@@ -21,6 +21,11 @@ public class Camera {
     public Camera() {
         this.position = new Vector3f(0, 0, 0);
     }
+
+    public Camera(float x,float y,float z) {
+
+        this.position = new Vector3f(x, y, z);
+    }
     
     /**
      * Смещение камеры

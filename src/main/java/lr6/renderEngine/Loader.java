@@ -19,11 +19,14 @@ public class Loader {
     private List<Integer> textures = new ArrayList<>();
 
 
-    public RawModel loadToVao(float[] positions, float[] textureCoords, int[] indices){
+    public RawModel loadToVao(float[] positions, float[] textureCoords,float[] normals, int[] indices){
         int vaoId= createVao();
         bindIndicesBuffer(indices);
         storeDataInAttributeList(0, 3, positions);
         storeDataInAttributeList(1, 2, textureCoords);
+        // VAO #2 имеет 3х мерные Векторы(xyz), векторы нормали
+        storeDataInAttributeList(2, 3, normals);
+
         unbindVao(); // отвязываем VAO
         // возвращаем загруженную модель: id и количество вершин
         return new RawModel(vaoId,indices.length);
@@ -103,4 +106,5 @@ public class Loader {
         for (int texture : textures)
             GL11.glDeleteTextures(texture);
     }
+
 }

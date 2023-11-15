@@ -1,6 +1,7 @@
 package lr6.shaders;
 
 import lr6.entities.Camera;
+import lr6.entities.Light;
 import lr6.toolbox.Maths;
 import org.joml.Matrix4f;
 
@@ -20,6 +21,9 @@ public class StaticShader extends ShaderProgram {
     // идентификатор юниформы матрицы вида
     private int location_viewMatrix;
 
+    private int location_lightPosition; // позиция источника света
+    private int location_lightColour; // цвет источника света
+
     public StaticShader() {
         super(VERTEX_FILE, FRAGMENT_FILE);
     }
@@ -29,6 +33,7 @@ public class StaticShader extends ShaderProgram {
         // связываем списки атрибутов VAO с шейдером
         super.bindAttribute(0, "position");
         super.bindAttribute(1, "textureCoords");
+        super.bindAttribute(2, "normal");
     }
 
     @Override
@@ -37,6 +42,17 @@ public class StaticShader extends ShaderProgram {
         location_transformationMatrix = super.getUniformLocation("transformationMatrix");
         location_projectionMatrix = super.getUniformLocation("projectionMatrix");
         location_viewMatrix = super.getUniformLocation("viewMatrix");
+        location_lightPosition = super.getUniformLocation("lightPosition");
+        location_lightColour = super.getUniformLocation("lightColour");
+    }
+
+    /**
+     * Загрузка позиции и цвета источника света, в юниформу
+     * @param light источник света
+     */
+    public void loadLight(Light light) {
+        super.loadVector(location_lightPosition, light.getPosition());
+        super.loadVector(location_lightColour, light.getColour());
     }
 
     /**

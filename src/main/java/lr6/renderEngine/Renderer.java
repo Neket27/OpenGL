@@ -70,6 +70,8 @@ public class Renderer {
         // Привяжем её, чтобы функции, использующие текстуры, знали какую текстуру использовать
         GL11.glBindTexture(GL11.GL_TEXTURE_2D, model.getTexture().getId());
 
+        GL20.glEnableVertexAttribArray(2); // векторы нормали
+
         // Рисуем примитивы. Аргументы:
         // - тип примитива (в данном случаем треугольники)
         // - количество вершин в модели
@@ -80,6 +82,7 @@ public class Renderer {
         // т.к. закончили использовать нулевой список атрибутов, то отключаем
         GL20.glDisableVertexAttribArray(0);
         GL20.glDisableVertexAttribArray(1);
+        GL20.glDisableVertexAttribArray(2);
         // отвязываем VAO модели
         GL30.glBindVertexArray(0);
     }
