@@ -1,6 +1,7 @@
 package lr6.renderEngine;
 
 import lr6.entities.Entity;
+import lr6.entities.Light;
 import lr6.models.RawModel;
 import lr6.models.TexturedModel;
 import lr6.shaders.StaticShader;

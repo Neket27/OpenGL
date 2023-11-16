@@ -13,6 +13,7 @@ public class Entity {
     private float rotationX, rotationY, rotationZ;
     /** масштаб модели в 3д пространстве */
     private float scale;
+    private Light light;
 
     private  Light light;
 
