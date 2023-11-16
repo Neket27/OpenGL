@@ -10,12 +10,12 @@
  import lr6.renderEngine.DisplayManager;
  import lr6.renderEngine.Loader;
  import lr6.renderEngine.MasterRenderer;
- import lr6.renderEngine.Renderer;
  import lr6.shaders.StaticShader;
  import lr6.textures.ModelTexture;
  import org.joml.Vector3f;
 
  import java.util.ArrayList;
+ import java.util.LinkedList;
  import java.util.List;
  import java.util.Random;
 
@@ -98,40 +98,33 @@ public class MainGameLoop {
 
         List<Entity> allBox = new ArrayList<>();
         Random random = new Random();
+        List<Light> lights= new LinkedList<>();
+        entity.setLight(light);
+        entity2.setLight(light2);
+        lights.add(light);
+        lights.add(light2);
+        allBox.add(entity);
+        allBox.add(entity2);
 
-        for (int i = 0; i < 200; i++) {
-            float x = random.nextFloat() * 100 - 50;
-            float y = random.nextFloat() * 100 - 50;
-            float z = random.nextFloat() * -300;
-            allBox.add(new Entity( staticModel,
-                    new Vector3f(x, y, z),
-                    random.nextFloat() * 180f,
-                    random.nextFloat() * 180f, 0f, 1f));
-        }
 
         MasterRenderer renderer = new MasterRenderer();
         // запускаем цикл пока пользователь не закроет окно
         while (DisplayManager.shouldDisplayClose()) {
-            entity.increaseRotation(0, 1, 0);
-            entity2.increaseRotation(0, -1, 0);
             camera.move(); // двигаем камеру
             // рисуем объекты
             for (Entity box : allBox){
                 box.increaseRotation(0, 1, 0);
                 renderer.processEntity(box);
         }
-            renderer.render(light, camera);
+            renderer.render(camera);
             DisplayManager.updateDisplay();
         }
-
 
 
         shader.cleanUp(); // очищаем шейдер статических моделей
         loader.cleanUp(); // очищаем память от загруженной модели
         DisplayManager.closeDisplay();
     }
-
-
 
 
  }

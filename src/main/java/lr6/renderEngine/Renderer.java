@@ -1,6 +1,7 @@
 package lr6.renderEngine;
 
 import lr6.entities.Entity;
+import lr6.entities.Light;
 import lr6.models.RawModel;
 import lr6.models.TexturedModel;
 import lr6.shaders.StaticShader;
@@ -58,6 +59,7 @@ public class Renderer {
             prepareTexturedModel(model); // подготавливаем текстурированную модель
             List<Entity> batch = entities.get(model); // получаем все сущности
             for (Entity entity : batch) { // проходимся по каждому объекту
+                shader.loadLight(entity.getLight()); //загружаем в шейдер источник света
                 prepareInstance(entity); // подготавливаем объект
 
                 // Рисуем примитивы. Аргументы:

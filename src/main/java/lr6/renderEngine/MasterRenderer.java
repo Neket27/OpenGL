@@ -25,10 +25,10 @@ public class MasterRenderer {
      * @param sun источник света
      * @param camera камера
      */
-    public void render(Light sun, Camera camera) {
+    public void render(Camera camera) {
         renderer.prepare(); // подготовка окна для рисования кадра
         shader.start(); // запускаем шейдер статических моделей
-        shader.loadLight(sun); //загружаем в шейдер источник света
+        //shader.loadLight(sun); //загружаем в шейдер источник света
         shader.loadViewMatrix(camera); // обновляем матрицу вида относительно положения камеры
         renderer.render(entities); // визуализация списка моделей
         shader.stop(); // останавливаем шейдер статических моделей

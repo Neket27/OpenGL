@@ -13,6 +13,7 @@ public class Entity {
     private float rotationX, rotationY, rotationZ;
     /** масштаб модели в 3д пространстве */
     private float scale;
+    private Light light;
 
     /**
      * Конструктор объекта 
@@ -103,6 +104,14 @@ public class Entity {
 
     public void setScale(float scale) {
         this.scale = scale;
+    }
+
+    public Light getLight() {
+        return light;
+    }
+
+    public void setLight(Light light) {
+        this.light = light;
     }
 }
 
