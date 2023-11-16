@@ -1,5 +1,6 @@
 package lr6.renderEngine;
 
+import lr6.entities.Background;
 import lr6.entities.Entity;
 import lr6.entities.Light;
 import lr6.models.RawModel;
@@ -8,6 +9,8 @@ import lr6.shaders.StaticShader;
 import lr6.textures.ModelTexture;
 import lr6.toolbox.Maths;
 import org.joml.Matrix4f;
+import org.joml.Vector3f;
+import org.joml.Vector4f;
 import org.lwjgl.opengl.GL11;
 import org.lwjgl.opengl.GL13;
 import org.lwjgl.opengl.GL20;
@@ -46,7 +49,7 @@ public class Renderer {
         GL11.glEnable(GL11.GL_DEPTH_TEST); // включаем тест глубины
         // Очистка экрана и буфера глубины, а также рисование цветом в цветовом буфере
         GL11.glClear(GL11.GL_COLOR_BUFFER_BIT | GL11.GL_DEPTH_BUFFER_BIT);
-        GL11.glClearColor(0.2f, 0.1f, 0.2f, 0.1f); // Загрузка выбранного цвета в цветовой буфер
+        GL11.glClearColor(0.0f,0.0f,0.0f,1); // Загрузка выбранного цвета в цветовой буфер
     }
 
 
@@ -55,6 +58,9 @@ public class Renderer {
      * @param entities список моделей
      */
     public void render(Map<TexturedModel, List<Entity>> entities) {
+        Background background =new Background(new Vector4f(1.0f, 0.0f, 1.0f,1));
+        shader.loadBackground(background);
+
         for (TexturedModel model : entities.keySet()) { // для каждой модели
             prepareTexturedModel(model); // подготавливаем текстурированную модель
             List<Entity> batch = entities.get(model); // получаем все сущности

@@ -9,6 +9,8 @@ out vec4 fragColor;
 
 uniform sampler2D textureSampler;
 uniform vec3 lightColour; // цвет источника света
+uniform vec4 background; // фон
+
 
 uniform float shineDamper; // коэффициент блеска материала
 uniform float reflectivity; // отражательная способность материала
@@ -39,6 +41,6 @@ void main()
 
       // метод texture координату точки на модели сопоставляет с координатой точи на текстуре
       // и возвращает цвет пикселя
-      fragColor = vec4(diffuse, 1.0) * texture(textureSampler, pass_textureCoords)
+      fragColor = vec4(diffuse, 1.0) * background
              + vec4(finalSpecular, 1.0);
 }
