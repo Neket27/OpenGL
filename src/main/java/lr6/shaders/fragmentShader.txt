@@ -41,6 +41,6 @@ void main()
 
       // метод texture координату точки на модели сопоставляет с координатой точи на текстуре
       // и возвращает цвет пикселя
-      fragColor = vec4(diffuse, 1.0) * background
+      fragColor = vec4(diffuse, 1.0) * texture(textureSampler, pass_textureCoords)
              + vec4(finalSpecular, 1.0);
 }

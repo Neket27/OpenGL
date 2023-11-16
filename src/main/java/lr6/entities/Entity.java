@@ -15,6 +15,8 @@ public class Entity {
     private float scale;
     private Light light;
 
+    private  Light light;
+
     /**
      * Конструктор объекта 
      * @param model текстурированная модель
