@@ -17,7 +17,6 @@
  import java.util.ArrayList;
  import java.util.LinkedList;
  import java.util.List;
- import java.util.Random;
 
  /**
  * Основной цикл игры
@@ -29,34 +28,11 @@ public class MainGameLoop {
         
         Loader loader = new Loader(); // загрузчик моделей
         StaticShader shader = new StaticShader(); // шейдер статических моделей
-       // Renderer renderer = new Renderer(shader); // визуализатор моделей
-
-        float[] vertices = {
-                0.0f, 0.5f, -0.4f, // V0
-                -0.5f, -0.5f, -0.5f, // V1
-                0.5f, -0.5f, -0.5f, // V2
-               //  0.0f, -1.0f, 0f, // V1
-        };
-
-        int[] indices = {
-                0, 1, 2,
-             //   2,3,0
-
-        };
-
-        float[] textureCoords = {
-                0.5f, 0.5f, // V0
-                0.8f, 0.0f, // V1
-                0.0f, 0.0f, // V2
-            //    0.7f, 0.1f, // V0
-        };
-
 
 
         Sphere sphere= new Sphere(3.4f, 100, 100);
         Sphere sphere2= new Sphere(3.4f, 100, 100);
         // загружаем массив вершин, текстурных координат и индексов в память GPU
-     //   RawModel model = loader.loadToVao(vertices, textureCoords, indices);
         RawModel model = loader.loadToVao(sphere.getVertices(), sphere.getTextureCoords(),sphere.getNormalsArray() ,sphere.getIndices());
         RawModel model2 = loader.loadToVao(sphere2.getVertices(), sphere2.getTextureCoords(),sphere2.getNormalsArray() ,sphere2.getIndices());
         // загружаем модель в память OpenGL
@@ -86,10 +62,9 @@ public class MainGameLoop {
 
         Camera camera = new Camera(0,-2,30);
         // создание источника света
-       // Light light = new Light(new Vector3f(0, 10, -20), new Vector3f(1.0f, 1, 1.0f));
         //                                    откуда падает источник света               цвет
         Light light = new Light(new Vector3f(10.0f, 20.7f, 8.0f), new Vector3f(0.7f, 0.7f, 0.7f));
-        Light light2 = new Light(new Vector3f(-5f, 10f, 12.0f), new Vector3f(1.0f, 0.0f, 1.0f));
+        Light light2 = new Light(new Vector3f(-5f, 10f, 12.0f), new Vector3f(1.0f, 1.0f, 0.0f));
         // Установка переменных блеска
         texture.setShineDamper(0.2f); // коэффицент юлеска материала
         texture.setReflectivity(0.2f);// отражающая способность от 0 до 1
@@ -97,7 +72,6 @@ public class MainGameLoop {
         texture2.setReflectivity(1);// отражающая способность от 0 до 1
 
         List<Entity> allBox = new ArrayList<>();
-        Random random = new Random();
         List<Light> lights= new LinkedList<>();
         entity.setLight(light);
         entity2.setLight(light2);
