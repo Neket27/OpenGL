@@ -10,14 +10,12 @@
  import lr6.renderEngine.DisplayManager;
  import lr6.renderEngine.Loader;
  import lr6.renderEngine.MasterRenderer;
- import lr6.renderEngine.Renderer;
  import lr6.shaders.StaticShader;
  import lr6.textures.ModelTexture;
  import org.joml.Vector3f;
 
  import java.util.ArrayList;
  import java.util.List;
- import java.util.Random;
 
  /**
  * Основной цикл игры
@@ -97,30 +95,32 @@ public class MainGameLoop {
         texture2.setReflectivity(1);// отражающая способность от 0 до 1
 
         List<Entity> allBox = new ArrayList<>();
-        Random random = new Random();
-
-        for (int i = 0; i < 200; i++) {
-            float x = random.nextFloat() * 100 - 50;
-            float y = random.nextFloat() * 100 - 50;
-            float z = random.nextFloat() * -300;
-            allBox.add(new Entity( staticModel,
-                    new Vector3f(x, y, z),
-                    random.nextFloat() * 180f,
-                    random.nextFloat() * 180f, 0f, 1f));
-        }
-
+        entity.setLight(light);
+        entity2.setLight(light2);
+        allBox.add(entity);
+        allBox.add(entity2);
         MasterRenderer renderer = new MasterRenderer();
         // запускаем цикл пока пользователь не закроет окно
         while (DisplayManager.shouldDisplayClose()) {
-            entity.increaseRotation(0, 1, 0);
-            entity2.increaseRotation(0, -1, 0);
             camera.move(); // двигаем камеру
             // рисуем объекты
-            for (Entity box : allBox){
-                box.increaseRotation(0, 1, 0);
-                renderer.processEntity(box);
-        }
-            renderer.render(light, camera);
+//           renderer.processEntity(allBox.get(0));
+//           renderer.render(camera);
+//           DisplayManager.updateDisplay();
+
+//           renderer.processEntity(allBox.get(1));
+//           renderer.render(light2, camera);
+//           DisplayManager.updateDisplay();
+
+            camera.move(); // двигаем камеру
+            renderer.prepare(); // подготовка окна для рисования кадра
+
+            shader.start(); // запускаем шейдер статических моделей
+            shader.loadLight(light); //загружаем в шейдер источник света
+            shader.loadViewMatrix(camera); // обновляем матрицу вида относительно положения камеры
+            renderer.render(entity, shader); // рисуем объект
+            shader.stop(); // останавливаем шейдер статических моделей
+
             DisplayManager.updateDisplay();
         }
 

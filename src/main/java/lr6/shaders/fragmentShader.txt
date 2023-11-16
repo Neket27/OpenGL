@@ -9,6 +9,7 @@ out vec4 fragColor;
 
 uniform sampler2D textureSampler;
 uniform vec3 lightColour; // цвет источника света
+uniform vec3 backgroundColour; //  фоновый цвет
 
 uniform float shineDamper; // коэффициент блеска материала
 uniform float reflectivity; // отражательная способность материала
@@ -23,7 +24,7 @@ void main()
       // вычисляем скалярную разницу между векторами
       float nDotl = dot(unitNormal,unitLight);
       float brightness = max(nDotl, 0.2); // яркость пикселя от 0.2 до 1
-      vec3 diffuse = brightness * lightColour; // фоновый свет
+      vec3 diffuse = backgroundColour*brightness; // фоновый свет
 
    vec3 lightDirection = -unitLight; // противоположность вектору света
     // расчет вектора отражения
@@ -39,6 +40,6 @@ void main()
 
       // метод texture координату точки на модели сопоставляет с координатой точи на текстуре
       // и возвращает цвет пикселя
-      fragColor = vec4(diffuse, 1.0) * texture(textureSampler, pass_textureCoords)
+      fragColor = vec4(diffuse, 1.0) * vec4(0.2,0.7,0.1,1)
              + vec4(finalSpecular, 1.0);
 }

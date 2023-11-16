@@ -14,6 +14,8 @@ public class Entity {
     /** масштаб модели в 3д пространстве */
     private float scale;
 
+    private  Light light;
+
     /**
      * Конструктор объекта 
      * @param model текстурированная модель
@@ -103,6 +105,14 @@ public class Entity {
 
     public void setScale(float scale) {
         this.scale = scale;
+    }
+
+    public Light getLight() {
+        return light;
+    }
+
+    public void setLight(Light light) {
+        this.light = light;
     }
 }
 

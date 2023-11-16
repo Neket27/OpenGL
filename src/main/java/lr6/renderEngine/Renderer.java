@@ -37,16 +37,16 @@ public class Renderer {
                 .setPerspective(FOV, DisplayManager.WINDOW_WIDTH/ DisplayManager.WINDOW_HEIGHT, Z_NEAR, Z_FAR));
         shader.stop();
     }
-
-    /**
-     * Вызввается каждый кадр данный метод.
-     */
-    public void prepare() {
-        GL11.glEnable(GL11.GL_DEPTH_TEST); // включаем тест глубины
-        // Очистка экрана и буфера глубины, а также рисование цветом в цветовом буфере
-        GL11.glClear(GL11.GL_COLOR_BUFFER_BIT | GL11.GL_DEPTH_BUFFER_BIT);
-        GL11.glClearColor(0.2f, 0.1f, 0.2f, 0.1f); // Загрузка выбранного цвета в цветовой буфер
-    }
+//
+//    /**
+//     * Вызввается каждый кадр данный метод.
+//     */
+//    public void prepare() {
+//        GL11.glEnable(GL11.GL_DEPTH_TEST); // включаем тест глубины
+//        // Очистка экрана и буфера глубины, а также рисование цветом в цветовом буфере
+//        GL11.glClear(GL11.GL_COLOR_BUFFER_BIT | GL11.GL_DEPTH_BUFFER_BIT);
+//        GL11.glClearColor(0.2f,0.7f,0.1f,1); // Загрузка выбранного цвета в цветовой буфер
+//    }
 
 
     /**
@@ -58,6 +58,7 @@ public class Renderer {
             prepareTexturedModel(model); // подготавливаем текстурированную модель
             List<Entity> batch = entities.get(model); // получаем все сущности
             for (Entity entity : batch) { // проходимся по каждому объекту
+                shader.loadLight(entity.getLight()); //загружаем в шейдер источник света
                 prepareInstance(entity); // подготавливаем объект
 
                 // Рисуем примитивы. Аргументы:
@@ -122,5 +123,7 @@ public class Renderer {
         // передача преобразований в шейдер
         shader.loadTransformationMatrix(transformationMatrix);
     }
+
+
 
 }

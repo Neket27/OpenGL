@@ -4,6 +4,8 @@ import lr6.entities.Camera;
 import lr6.entities.Light;
 import lr6.toolbox.Maths;
 import org.joml.Matrix4f;
+import org.joml.Vector3f;
+import org.joml.Vector4f;
 
 /**
  * Шейдер для создания всех статических моделей
@@ -26,6 +28,7 @@ public class StaticShader extends ShaderProgram {
 
     private int location_shineDamper; // коэффициент блеска материала
     private int location_reflectivity; // отражательная способность материала
+    private int location_backgroundColour; // фоновый цвет
 
     public StaticShader() {
         super(VERTEX_FILE, FRAGMENT_FILE);
@@ -49,6 +52,7 @@ public class StaticShader extends ShaderProgram {
         location_lightColour = super.getUniformLocation("lightColour");
         location_shineDamper = super.getUniformLocation("shineDamper");
         location_reflectivity = super.getUniformLocation("reflectivity");
+        location_backgroundColour = super.getUniformLocation("backgroundColour");
     }
 
     /**
@@ -58,6 +62,8 @@ public class StaticShader extends ShaderProgram {
     public void loadLight(Light light) {
         super.loadVector(location_lightPosition, light.getPosition());
         super.loadVector(location_lightColour, light.getColour());
+                                                            // фоновый цвет
+        super.loadVector(location_backgroundColour,new Vector3f(1.0f, 0.0f, 1.0f));
     }
 
     /**
