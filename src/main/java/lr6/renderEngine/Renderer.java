@@ -15,18 +15,23 @@ import org.lwjgl.opengl.GL30;
  * Визуализация данных
  */
 public class Renderer {
-
-    /** Поле зрения: Угол поля зрения в радианах */
+    /**
+     * Поле зрения: Угол поля зрения в радианах
+     */
     private static final float FOV = (float) Math.toRadians(60.0f);
-    /** Расстояние до ближней плоскости */
+    /**
+     * Расстояние до ближней плоскости
+     */
     private static final float Z_NEAR = 0.01f;
-    /** Расстояние до дальней плоскости */
+    /**
+     * Расстояние до дальней плоскости
+     */
     private static final float Z_FAR = 1000.f;
 
     public Renderer(StaticShader shader) {
         shader.start();
         shader.loadProjectionMatrix(new Matrix4f().identity()
-                .setPerspective(FOV, DisplayManager.WINDOW_WIDTH/ DisplayManager.WINDOW_HEIGHT, Z_NEAR, Z_FAR));
+                .setPerspective(FOV, DisplayManager.WINDOW_WIDTH / DisplayManager.WINDOW_HEIGHT, Z_NEAR, Z_FAR));
         shader.stop();
     }
 
@@ -42,6 +47,7 @@ public class Renderer {
 
     /**
      * Визуализация объекта
+     *
      * @param entity объект в пространстве
      * @param shader какой статический шейдер применить к модели
      */
@@ -55,7 +61,7 @@ public class Renderer {
         GL20.glEnableVertexAttribArray(0); // координаты вершин
         GL20.glEnableVertexAttribArray(1); // текстурные координаты
 
-        // создадим матрицу преобразования  и передадим преобразования 
+        // создадим матрицу преобразования  и передадим преобразования
         Matrix4f transformationMatrix = Maths.getTransformationMatrix(
                 entity.getPosition(),
                 entity.getRotationX(),

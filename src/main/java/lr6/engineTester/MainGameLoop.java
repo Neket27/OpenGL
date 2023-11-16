@@ -2,21 +2,18 @@
 
 
  import lr6.entities.Camera;
- import lr6.entities.Light;
- import lr6.primitives.Sphere;
  import lr6.entities.Entity;
- import lr6.io.Keyboard;
- import lr6.io.Mouse;
+ import lr6.entities.Light;
  import lr6.models.RawModel;
  import lr6.models.TexturedModel;
+ import lr6.primitives.Sphere;
  import lr6.renderEngine.DisplayManager;
  import lr6.renderEngine.Loader;
- import lr6.renderEngine.OBJLoader;
+ import lr6.renderEngine.MasterRenderer;
  import lr6.renderEngine.Renderer;
  import lr6.shaders.StaticShader;
  import lr6.textures.ModelTexture;
  import org.joml.Vector3f;
- import org.lwjgl.glfw.GLFW;
 
  import java.util.ArrayList;
  import java.util.List;
@@ -31,7 +28,7 @@ public class MainGameLoop {
         
         Loader loader = new Loader(); // загрузчик моделей
         StaticShader shader = new StaticShader(); // шейдер статических моделей
-        Renderer renderer = new Renderer(shader); // визуализатор моделей
+       // Renderer renderer = new Renderer(shader); // визуализатор моделей
 
         float[] vertices = {
                 0.0f, 0.5f, -0.4f, // V0
@@ -66,6 +63,7 @@ public class MainGameLoop {
 
         // загрузим текстуру используя загрузчик
         ModelTexture texture = new ModelTexture(loader.loadTexture("res/tutorial11/dragon.png",false));
+        ModelTexture texture2 = new ModelTexture(loader.loadTexture("res/tutorial11/dragon.png",false));
         // Создание текстурной модели
         TexturedModel staticModel = new TexturedModel(model, texture);
 
@@ -74,28 +72,40 @@ public class MainGameLoop {
                 0, 0, 0,
                 1.0f);
 
+        Entity entity2 = new Entity(staticModel,
+                new Vector3f(-8, 3.8f, -1.7f),
+                0, 0, 0,
+                1.0f);
+
+        texture.setShineDamper(0.2f); // коэффицент юлеска материала
+        texture.setReflectivity(0.2f);// отражающая способность от 0 до 1
+        texture2.setShineDamper(10); // коэффицент юлеска материала
+        texture2.setReflectivity(1);// отражающая способность от 0 до 1
+
         Camera camera = new Camera(0,0,20);
         // создание источника света
        // Light light = new Light(new Vector3f(0, 10, -20), new Vector3f(1.0f, 1, 1.0f));
         Light light = new Light(new Vector3f(0.2f, 0.7f, 0.1f), new Vector3f(1.0f, 0.0f, 1.0f));
+        Light light2 = new Light(new Vector3f(-5f, 10f, 12.0f), new Vector3f(1.0f, 0.0f, 1.0f));
+        List<Entity> allBox = new ArrayList<>();
+        allBox.add(entity);
+        allBox.add(entity2);
 
-
+// запускаем цикл пока пользователь не закроет окно
+        MasterRenderer renderer = new MasterRenderer();
         // запускаем цикл пока пользователь не закроет окно
         while (DisplayManager.shouldDisplayClose()) {
-            entity.increaseRotation(0, 1, 0);
+          //  entity.increaseRotation(0, 1, 0);
+          //  entity2.increaseRotation(0, -1, 0);
             camera.move(); // двигаем камеру
-            renderer.prepare(); // подготовка окна для рисования кадра
-
-            shader.start(); // запускаем шейдер статических моделей
-            shader.loadLight(light); //загружаем в шейдер источник света
-            shader.loadViewMatrix(camera); // обновляем матрицу вида относительно положения камеры
-            renderer.render(entity, shader); // рисуем объект
-            shader.stop(); // останавливаем шейдер статических моделей
-
-            DisplayManager.updateDisplay();
+            // рисуем объекты
+            for (Entity box : allBox) {
+                box.increaseRotation(0, 1, 0);
+                renderer.processEntity(box);
             }
+            renderer.render(light, camera);
+        }
 
-        
         shader.cleanUp(); // очищаем шейдер статических моделей
         loader.cleanUp(); // очищаем память от загруженной модели
         DisplayManager.closeDisplay();
